@@ -1,0 +1,15 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.vite/
+.pglite/
+pgdata/
+.DS_Store
+playwright-report/
+test-results/

@@ -1,0 +1,19 @@
+KALINGA — CLAUDE CODE KICKOFF (FINAL OWNER DECISIONS v2)
+
+You are working INSIDE MY EXISTING KALINGA REPOSITORY. Preserve all existing files, code and Git work.
+
+READ COMPLETELY before changing code:
+1) docs/KALINGA_Claude_Code_Master_Skill_Loop_Prompt_v2_FINAL.md
+2) docs/KALINGA_Project_Brief.md
+3) docs/KALINGA_Brand_Guidelines_v1.0.pdf
+Reference logo illustration, if present: assets/kalinga_logo_reference.png (shape reference only, NOT approved final master).
+
+Implement using FULL-STACK VERTICAL SLICES, not UI-first or an isolated mockup. Begin with repo audit S0, then implement S1 (bilingual English/Filipino brand-accurate Home + four-item mobile nav Home/Learn/Clinics/Menu + real local public config API + safe PWA shell + tests). Use existing tech where compatible. Then proceed feature by feature with bounded implement → verify → repair loops. Use the reusable `.claude/skills/` files if available, especially /kalinga-next-slice for subsequent slices.
+
+Fixed decisions: existing repo; full-stack feature-by-feature; mobile nav Home/Learn/Clinics/Menu; anonymous public appointments secured by separate reference+secret; owner-approved minors 15–17 booking procedure (use its ACTUAL SOP artifact, never fabricate consent rules); English+Filipino; labeled fictitious demo clinics/content only; local development and MOCK-only notifications. These choices are final; don't ask me to reselect them.
+
+If the actual approved minor SOP artifact isn't in the repo, implement a versioned policy interface and DEMO-only integration tests, but do NOT enable real age-15–17 requests without the approved SOP evidence and clinic mapping. Never assume a real partner, reviewed medical copy or production logo approval.
+
+Produce updated traceability, technical decisions, test evidence and status after each slice. Run actual tests and review security/accessibility/i18n. No public deployment, real messaging, external integrations or destructive repo actions without my explicit permission. Do safe implementation work, not just planning.
+
+FIRST ACTION: inspect repo and source paths; identify baseline commands/status; begin S0 and S1 within this session and report actual changes and checks.

@@ -1,0 +1,1 @@
+{ "extends": "../../tsconfig.base.json", "compilerOptions": { "noEmit": true, "jsx": "react-jsx", "lib": ["ES2022", "DOM", "DOM.Iterable"], "types": ["vite/client"], "paths": { "@kalinga/shared": ["../../packages/shared/src/index.ts"] } }, "include": ["src", "vite.config.ts"] }

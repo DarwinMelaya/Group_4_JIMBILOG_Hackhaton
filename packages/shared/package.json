@@ -1,0 +1,15 @@
+{
+  "name": "@kalinga/shared",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": { "zod": "4.6.7" },
+  "devDependencies": { "@types/node": "26.6.6", "vitest": "5.0.5" }
+}

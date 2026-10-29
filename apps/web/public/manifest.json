@@ -1,0 +1,16 @@
+{
+  "name": "KALINGA",
+  "short_name": "KALINGA",
+  "description": "A private, plain-language guide to sexual health information and clinic options (DEMO prototype).",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#34496D",
+  "background_color": "#FAFBFE",
+  "lang": "en",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

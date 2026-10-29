@@ -1,0 +1,19 @@
+/* KALINGA Palette B tokens (master prompt section 3). Values are locked; do not alter without brand approval. */
+:root {
+  --color-indigo: #34496D;       /* Deep Indigo: primary brand/headings/nav */
+  --color-periwinkle: #586AA7;   /* interactive accents and pathway progress */
+  --color-lavender: #E9EDFC;     /* Cloud Lavender supportive panels */
+  --color-rose: #D78FA3;         /* Dusty Rose limited compassion accents */
+  --color-peach: #F4C9AA;        /* Peach Glow limited warm highlights */
+  --color-white: #FAFBFE;        /* Canvas White app background */
+  --color-ink: #1D2C43;          /* Slate Ink primary copy */
+  --color-muted: #52627B;        /* Muted Blue Gray secondary copy */
+  --color-border: #DDE3F0;       /* Soft Border field/divider strokes */
+  --space-unit: 8px;
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-feature: 24px;
+  --touch-target: 44px;
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
