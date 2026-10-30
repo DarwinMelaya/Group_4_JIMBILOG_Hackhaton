@@ -7,7 +7,7 @@
   var CACHE_PREFIX = 'kalinga-static-';
   var OFFLINE_URL = '/offline.html';
   var OFFLINE_ASSET_URLS = ['/offline.css', '/offline.js']; /* external, so the offline page works under script-src/style-src 'self' */
-  var PRECACHE_URLS = [OFFLINE_URL, OFFLINE_ASSET_URLS[0], OFFLINE_ASSET_URLS[1], '/manifest.json', '/icons/icon-192.png', '/icons/icon-512.png', '/icons/icon.svg'];
+  var PRECACHE_URLS = [OFFLINE_URL, OFFLINE_ASSET_URLS[0], OFFLINE_ASSET_URLS[1], '/manifest.json', '/icons/kalinga-logo.png'];
   /* The offline page is REQUIRED (install fails without it); every other precache entry is optional. */
   var REQUIRED_PRECACHE_URLS = [OFFLINE_URL];
   /* Private roots are matched by path SEGMENT: '/staff' and '/staff/...' match, '/staffing' does not. */

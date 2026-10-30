@@ -48,7 +48,7 @@ describe('cache policy', () => {
   });
   it('treats hashed static assets and icons as cacheable static', () => {
     expect(P.classifyRequest(req('/assets/index-abc123.js'), ORIGIN)).toBe('static');
-    expect(P.classifyRequest(req('/icons/icon-192.png'), ORIGIN)).toBe('static');
+    expect(P.classifyRequest(req('/icons/kalinga-logo.png'), ORIGIN)).toBe('static');
     expect(P.classifyRequest(req('/manifest.json'), ORIGIN)).toBe('static');
   });
   it('does not cache no-store, private, no-cache or cookie responses', () => {

@@ -413,7 +413,7 @@ describe('content review', () => {
     });
     const { container } = renderApp('/admin/content');
     await screen.findByText(/<img src=x onerror=alert\(1\)>/);
-    expect(container.querySelector('img')).toBeNull();
+    expect(container.querySelector('img:not(.logo__mark)')).toBeNull();
   });
 });
 

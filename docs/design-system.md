@@ -1,6 +1,6 @@
 # KALINGA design system (Brand Guidelines v1.0 refresh)
 
-Source of truth: `apps/web/src/styles/tokens.css`. Components consume semantic tokens; raw hex lives only there (plus the static files that cannot import CSS: `public/offline.css`, `manifest.json`, `index.html` theme-color, `icons/icon.svg`).
+Source of truth: `apps/web/src/styles/tokens.css`. Components consume semantic tokens; raw hex lives only there (plus the static files that cannot import CSS: `public/offline.css`, `manifest.json`, `index.html` theme-color, `icons/kalinga-logo.png`).
 
 ## Palette and hierarchy
 | Role | Token | Hex | Use |
@@ -33,5 +33,5 @@ Legacy names (`--color-indigo`, `--color-periwinkle`, `--color-lavender`, `--col
 ink/canvas, ink/warm, ink/tint, muted/canvas, muted/tint, muted/raised, navy/canvas, action/canvas, action/tint, white on vivid, electric, midnight, royal, and muted-on-dark on royal/vivid. Focus ring electric on canvas 7.6:1.
 
 ## Known follow-ups
-- `public/icons/icon-192.png` and `icon-512.png` still use the previous palette; regenerate from `icon.svg` (placeholder artwork, brand gate still open).
+- `kalinga-logo.png` is the single brand icon (favicon, manifest, header). Its green/coral/gold artwork is outside the indigo UI palette; confirm that is intended.
 - Visual QA in a real browser at 360 / 768 / 1280 px has not been run in this change.

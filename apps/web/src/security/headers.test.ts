@@ -203,7 +203,7 @@ describe('S1-12 classifyRequest rejects encoded separators', () => {
   });
   it('still caches ordinary static files and navigations', () => {
     expect(cls('/assets/index-abc123.js')).toBe('static');
-    expect(cls('/icons/icon-192.png')).toBe('static');
+    expect(cls('/icons/kalinga-logo.png')).toBe('static');
     expect(cls('/manifest.json')).toBe('static');
     expect(cls('/learn', 'navigate')).toBe('navigate');
   });

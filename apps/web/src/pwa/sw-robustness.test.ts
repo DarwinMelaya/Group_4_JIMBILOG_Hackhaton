@@ -48,7 +48,7 @@ describe('S1-9 (b) strategy for non-hashed files', () => {
   const P = loadPolicy();
   it('hashed assets are immutable; manifest, icons and offline page revalidate', () => {
     expect(P.staticStrategy('/assets/index-abc123.js')).toBe('immutable');
-    for (const p of ['/manifest.json', '/icons/icon-192.png', '/offline.html']) {
+    for (const p of ['/manifest.json', '/icons/kalinga-logo.png', '/offline.html']) {
       expect(P.staticStrategy(p), p).toBe('revalidate');
     }
   });
@@ -68,10 +68,10 @@ describe('S1-9 (b) strategy for non-hashed files', () => {
   it('propagates edits to icons the same way', async () => {
     const sw = bootSw();
     await sw.fire('install');
-    const key = ORIGIN + '/icons/icon.svg';
+    const key = ORIGIN + '/icons/kalinga-logo.png';
     sw.stores.get('kalinga-static-1')!.set(key, fakeRes('old icon'));
     sw.fetchFn.mockResolvedValueOnce(fakeRes('new icon'));
-    await sw.fire('fetch', { request: swReq('/icons/icon.svg') });
+    await sw.fire('fetch', { request: swReq('/icons/kalinga-logo.png') });
     expect((sw.stores.get('kalinga-static-1')!.get(key) as { body: string }).body).toBe('new icon');
   });
   it('keeps the stale copy and does not reject when the revalidation fails or is not cacheable', async () => {
@@ -161,13 +161,13 @@ describe('S1-9 (d) tolerant precache install', () => {
     expect(out.settled.map((s) => s.status)).toEqual(['fulfilled']);
     expect([...sw.stores.get('kalinga-static-1')!.keys()]).toEqual([ORIGIN + '/offline.html']);
   });
-  it('installs when only one icon is missing and caches the rest', async () => {
-    const sw = bootSw({ failAdd: (u) => u === '/icons/icon-512.png' });
+  it('installs when only one precached file is missing and caches the rest', async () => {
+    const sw = bootSw({ failAdd: (u) => u === '/manifest.json' });
     const out = await sw.fire('install');
     expect(out.settled.map((s) => s.status)).toEqual(['fulfilled']);
     const keys = [...sw.stores.get('kalinga-static-1')!.keys()];
-    expect(keys).toContain(ORIGIN + '/icons/icon-192.png');
-    expect(keys).not.toContain(ORIGIN + '/icons/icon-512.png');
+    expect(keys).toContain(ORIGIN + '/icons/kalinga-logo.png');
+    expect(keys).not.toContain(ORIGIN + '/manifest.json');
   });
   it('fails the install when the offline page cannot be cached', async () => {
     const sw = bootSw({ failAdd: (u) => u === '/offline.html' });
