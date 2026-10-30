@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ClipboardCheck } from 'lucide-react';
 import { URGENT_ARTICLE_SLUG } from '@kalinga/shared';
 import { useI18n } from '../i18n/I18nProvider';
 import type { MessageId } from '../i18n/catalog';
@@ -60,6 +61,7 @@ export function CareIndex() {
       <ul className="care__topics">
         {CARE_TOPICS.map((topic) => (
           <li key={topic.slug} className="card">
+            <span className="card-icon" aria-hidden="true"><ClipboardCheck size={22} /></span>
             <h3>
               <Link to={`/care/${topic.slug}`}>{t(topic.titleId)}</Link>
             </h3>

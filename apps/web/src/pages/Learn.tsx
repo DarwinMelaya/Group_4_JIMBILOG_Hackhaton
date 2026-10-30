@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BookHeart, TriangleAlert } from 'lucide-react';
 import { ARTICLE_TOPICS, type ArticleTopic } from '@kalinga/shared';
 import { useArticles } from '../api/articles';
 import { ReviewBadge } from '../components/ReviewBadge';
@@ -106,6 +107,7 @@ export function Learn() {
           <ul className="article-list">
             {data.items.map((a) => (
               <li key={a.slug} className="article-card" data-urgent={a.isUrgent ? 'true' : undefined}>
+                <span className="card-icon" aria-hidden="true">{a.isUrgent ? <TriangleAlert size={22} /> : <BookHeart size={22} />}</span>
                 <h3>
                   <Link to={`/learn/${a.slug}`}>{a.title}</Link>
                 </h3>

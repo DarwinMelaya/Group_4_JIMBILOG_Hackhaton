@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck } from 'lucide-react';
+import { Hospital, ShieldCheck } from 'lucide-react';
 import {
   CLINIC_SERVICE_CATEGORIES,
   MUNICIPALITIES,
@@ -28,6 +28,7 @@ export function ClinicCard({ clinic }: { clinic: ClinicSummary }) {
   const { t } = useI18n();
   return (
     <li className="clinic-card" data-demo={clinic.isDemo ? 'true' : undefined}>
+      <span className="card-icon" aria-hidden="true"><Hospital size={22} /></span>
       <h3>
         <Link to={`/clinics/${clinic.slug}`}>{clinic.name}</Link>
       </h3>

@@ -9,20 +9,20 @@ export function HeroIllustration() {
     <svg className="hero-art" viewBox="0 0 560 560" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id="ha-blob" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" className="ha-stop-violet" />
-          <stop offset="1" className="ha-stop-plum" />
+          <stop offset="0" className="ha-stop-green" />
+          <stop offset="1" className="ha-stop-olive" />
         </linearGradient>
         <linearGradient id="ha-phone" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" className="ha-stop-royal" />
-          <stop offset="1" className="ha-stop-midnight" />
+          <stop offset="0" className="ha-stop-emerald" />
+          <stop offset="1" className="ha-stop-forest" />
         </linearGradient>
         <linearGradient id="ha-shield" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" className="ha-stop-vivid" />
-          <stop offset="1" className="ha-stop-electric" />
+          <stop offset="0" className="ha-stop-emerald" />
+          <stop offset="1" className="ha-stop-green" />
         </linearGradient>
         <linearGradient id="ha-warm" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" className="ha-stop-rose" />
-          <stop offset="1" className="ha-stop-coral" />
+          <stop offset="0" className="ha-stop-gold" />
+          <stop offset="1" className="ha-stop-amber" />
         </linearGradient>
       </defs>
 

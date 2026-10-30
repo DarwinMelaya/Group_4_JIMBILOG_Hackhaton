@@ -1,72 +1,81 @@
-/* KALINGA design tokens, Brand Guidelines v1.0 refresh. Layers: brand ramp -> semantic roles -> component use.
-   Components read the semantic roles (and the legacy --color-* names below); only this file holds raw hex. */
+/* KALINGA design tokens: forest-green and warm-gold identity. Layers: brand ramp -> semantic roles -> component use.
+   Components read the semantic roles; only this file holds raw hex (static files that cannot import CSS excepted). */
 :root {
-  /* Brand ramp (Brand Guidelines v1.0). Foundations: midnight/navy. Interactive: vivid/electric. Accents: purple, mauve, rose, coral. */
-  --brand-midnight: #101440;     /* Midnight Indigo */
-  --brand-navy: #161955;         /* Deep Navy */
-  --brand-royal: #221F6E;        /* Royal Indigo */
-  --brand-vivid: #261CA3;        /* Vivid Indigo */
-  --brand-electric: #4025E1;     /* Electric Violet */
-  --brand-purple: #3E2A75;       /* Muted Purple */
-  --brand-plum: #613979;         /* Plum Violet */
-  --brand-mauve: #86497B;        /* Dusty Mauve */
-  --brand-rose: #AC5F7A;         /* Muted Rose */
-  --brand-coral: #D37C7A;        /* Warm Coral Peach */
+  /* Brand ramp. Foundations: forest/emerald. Supporting: green, moss, olive. Accents: gold, amber. Light: glow. */
+  --brand-forest: #073F29;       /* Deep Forest Green: nav, dark hero, headings */
+  --brand-emerald: #0D5E38;      /* Dark Emerald: primary buttons, interactive, nav highlight */
+  --brand-green: #2A7A46;        /* Medium Green: secondary accents, progress, selected, icons */
+  --brand-moss: #39582B;         /* Moss Green: dark sections, supporting surfaces */
+  --brand-olive: #67783F;        /* Muted Olive Green: illustration and decoration */
+  --brand-gold: #A38641;         /* Muted Gold: premium details */
+  --brand-amber: #E59C40;        /* Warm Amber: CTA highlights, illustration accents */
+  --brand-amber-hover: #F0AC5A;  /* amber CTA hover */
+  --brand-glow: #67D678;         /* Bright Green Glow: lighting and highlights, never text on light */
 
-  /* Tinted neutrals and surfaces (complementary, not in the brand ramp). */
-  --surface-canvas: #F7F6FD;     /* app background: near-white, faint violet */
+  /* Tinted neutrals and surfaces. */
+  --surface-canvas: #F6F8F1;     /* app background: ivory with a green cast */
   --surface-raised: #FFFFFF;     /* cards, inputs */
-  --surface-tint: #EEECFB;       /* supportive panels, selected states */
-  --surface-warm: #FCE6E0;       /* warm notices (demo banner, urgent) */
-  --line-soft: #D9D6F0;          /* dividers, field strokes */
-  --line-strong: #8C86C9;        /* strong input borders (3:1 non-text contrast on canvas) */
-  --text-primary: #101440;
-  --text-secondary: #46456F;
+  --surface-tint: #E7F0E3;       /* supportive panels, selected states */
+  --surface-ivory: #FBF6E8;      /* warm panels and notices */
+  --surface-warm: #FBEFD5;       /* demo banner, urgent notices */
+  --line-soft: #D3DFCF;          /* dividers, card borders */
+  --line-strong: #7B9680;        /* form-control borders (3:1 non-text contrast on canvas) */
+  --text-primary: #0B2418;
+  --text-secondary: #3E5846;
 
-  /* Legacy names kept so existing component rules inherit the refresh. */
-  --color-indigo: var(--brand-navy);        /* headings, brand text, nav */
-  --color-periwinkle: var(--brand-electric); /* interactive accents, focus, progress */
-  --color-lavender: var(--surface-tint);
-  --color-rose: var(--brand-rose);
-  --color-peach: var(--surface-warm);
-  --color-white: var(--surface-canvas);
+  /* Semantic roles used by components. */
+  --color-heading: var(--brand-forest);      /* headings, brand text, nav */
+  --color-action: var(--brand-emerald);      /* primary buttons, links, selected nav */
+  --color-accent: var(--brand-green);        /* focus ring, progress, icons */
+  --color-tint: var(--surface-tint);
+  --color-notice: var(--surface-warm);
+  --color-gold: var(--brand-gold);
+  --color-canvas: var(--surface-canvas);
   --color-ink: var(--text-primary);
   --color-muted: var(--text-secondary);
   --color-border: var(--line-soft);
-  --color-action: var(--brand-vivid);        /* primary buttons, links */
   --color-on-dark: #FFFFFF;
-  --color-on-dark-muted: #D8D5F7;
-  --color-peach-soft: #F6C3BB;               /* light coral tint for small text on dark (7:1 on vivid) */
+  --color-on-dark-muted: #DCEBDF;
+  --color-gold-soft: #F2D79B;                /* light gold for small text on dark (>= 7:1 on emerald) */
 
-  /* Gradients: indigo to violet only, kept to hero, primary action and selected states. */
-  --gradient-hero: linear-gradient(135deg, var(--brand-midnight) 0%, var(--brand-royal) 55%, var(--brand-vivid) 100%);
-  --gradient-action: linear-gradient(135deg, var(--brand-vivid) 0%, var(--brand-electric) 100%);
-  --glow-warm: radial-gradient(60% 60% at 85% 10%, rgb(211 124 122 / 0.35) 0%, rgb(211 124 122 / 0) 70%);
-  --gradient-warm: linear-gradient(160deg, var(--brand-purple) 0%, var(--brand-plum) 65%, var(--brand-mauve) 100%);
-  --gradient-glow: linear-gradient(135deg, var(--brand-plum) 0%, var(--brand-rose) 55%, var(--brand-coral) 100%);
-  --glow-page: radial-gradient(60% 100% at 85% 0, rgb(64 37 225 / 0.1), transparent 70%), radial-gradient(40% 80% at 0 0, rgb(211 124 122 / 0.12), transparent 70%);
-  --glow-cool:radial-gradient(50% 50% at 10% 100%, rgb(64 37 225 / 0.45) 0%, rgb(64 37 225 / 0) 70%);
+  /* Gradients. Hero: forest to green. Dark sections: forest to moss. Gold: decorative only, never behind small text. */
+  --gradient-hero: linear-gradient(135deg, var(--brand-forest) 0%, var(--brand-emerald) 55%, var(--brand-green) 100%);
+  --gradient-dark: linear-gradient(160deg, var(--brand-forest) 0%, var(--brand-moss) 100%);
+  --gradient-action: linear-gradient(135deg, var(--brand-emerald) 0%, var(--brand-green) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--brand-gold) 0%, var(--brand-amber) 100%);
+  --glow-warm: radial-gradient(60% 60% at 85% 10%, rgb(229 156 64 / 0.28) 0%, rgb(229 156 64 / 0) 70%);
+  --glow-cool: radial-gradient(50% 50% at 10% 100%, rgb(103 214 120 / 0.3) 0%, rgb(103 214 120 / 0) 70%);
+  --glow-page: radial-gradient(60% 100% at 85% 0, rgb(103 214 120 / 0.12), transparent 70%), radial-gradient(40% 80% at 0 0, rgb(229 156 64 / 0.1), transparent 70%);
 
-  /* Very subtle grain (SVG turbulence, inline data URI; allowed by img-src 'self' data:). Applied only to the hero. */
+  /* Grain (SVG turbulence, inline data URI; allowed by img-src 'self' data:). Hero and dark sections only. */
   --texture-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Card decoration: a faint leaf pair in the corner (colour is baked in at low opacity, so it never affects text contrast). */
+  --deco-leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M20 100C20 56 52 24 100 20c0 44-32 76-80 80Z' fill='%232A7A46' fill-opacity='.07'/%3E%3Cpath d='M20 100C44 76 66 52 100 20' fill='none' stroke='%232A7A46' stroke-opacity='.1' stroke-width='2'/%3E%3C/svg%3E");
+  /* Masked icon glyph for clickable cards (coloured by background-color, so it follows state). */
+  --icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
 
-  /* Elevation: two soft, indigo-tinted levels. */
-  --shadow-card: 0 1px 2px rgb(16 20 64 / 0.06), 0 4px 16px rgb(16 20 64 / 0.06);
-  --shadow-raised: 0 2px 4px rgb(16 20 64 / 0.08), 0 12px 32px rgb(16 20 64 / 0.14);
-  --shadow-action: 0 2px 8px rgb(38 28 163 / 0.35);
+  /* Elevation: two soft, green-tinted levels plus an action shadow. */
+  --shadow-card: 0 1px 2px rgb(7 63 41 / 0.06), 0 6px 18px rgb(7 63 41 / 0.07);
+  --shadow-raised: 0 2px 4px rgb(7 63 41 / 0.08), 0 14px 34px rgb(7 63 41 / 0.16);
+  --shadow-action: 0 2px 8px rgb(13 94 56 / 0.35);
 
-  /* Frosted glass (header, bottom nav). Solid fallback below when backdrop-filter is unsupported. */
-  --glass-bg: rgb(247 246 253 / 0.82);
+  /* Frosted glass (header, bottom nav). Solid fallback when backdrop-filter is unsupported. */
+  --glass-bg: rgb(246 248 241 / 0.84);
   --glass-blur: saturate(160%) blur(14px);
 
   --space-unit: 8px;
   --radius-button: 12px;
-  --radius-card: 16px;
-  --radius-feature: 24px;
+  --radius-card: 20px;
+  --radius-feature: 28px;
   --radius-pill: 999px;
   --touch-target: 44px;
+
+  /* Motion: one easing curve, three durations. Transform and opacity only. */
   --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
   --duration-quick: 160ms;
+  --duration-base: 240ms;
+  --duration-slow: 600ms;
+
   --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }

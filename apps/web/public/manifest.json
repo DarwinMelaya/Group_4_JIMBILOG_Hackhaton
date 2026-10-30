@@ -5,8 +5,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "theme_color": "#161955",
-  "background_color": "#F7F6FD",
+  "theme_color": "#073F29",
+  "background_color": "#F6F8F1",
   "lang": "en",
   "icons": [
     { "src": "/icons/kalinga-logo.png", "sizes": "600x600", "type": "image/png", "purpose": "any" }

@@ -187,8 +187,8 @@ describe('manifest and shell files', () => {
     expect(m.short_name).toBe('KALINGA');
     expect(m.display).toBe('standalone');
     expect(m.start_url).toBe('/');
-    expect(m.theme_color).toBe('#161955');
-    expect(m.background_color).toBe('#F7F6FD');
+    expect(m.theme_color).toBe('#073F29');
+    expect(m.background_color).toBe('#F6F8F1');
     expect(m.icons.length).toBeGreaterThan(0);
     for (const i of m.icons) {
       expect(fs.existsSync(path.join(pub, i.src))).toBe(true);

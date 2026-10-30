@@ -1,44 +1,44 @@
-# KALINGA design system (Brand Guidelines v1.0 refresh)
+# KALINGA design system (forest-and-gold)
 
-Source of truth: `apps/web/src/styles/tokens.css`. Components consume semantic tokens; raw hex lives only there (plus the static files that cannot import CSS: `public/offline.css`, `manifest.json`, `index.html` theme-color, `icons/kalinga-logo.png`).
+Source of truth: `apps/web/src/styles/tokens.css`. Components read semantic tokens; raw hex lives only there, plus the static files that cannot import CSS (`public/offline.css`, `manifest.json`, `index.html` theme-color).
+Styles load in this order: `tokens.css`, `app.css` (shell, forms, buttons), `landing.css` (landing page, footer, motion), `cards.css` (shared card system).
 
 ## Palette and hierarchy
 | Role | Token | Hex | Use |
 |---|---|---|---|
-| Foundation | `--brand-midnight` | #101440 | body text, hero gradient start |
-| Foundation | `--brand-navy` | #161955 | headings, brand text, theme-color |
-| Foundation | `--brand-royal` | #221F6E | hero gradient middle |
-| Interactive | `--brand-vivid` | #261CA3 | links, secondary buttons, selected nav (`--color-action`) |
-| Interactive | `--brand-electric` | #4025E1 | focus ring, primary gradient end (`--color-periwinkle`) |
-| Accent | `--brand-purple` / `--brand-plum` / `--brand-mauve` | #3E2A75 / #613979 / #86497B | reserved for illustration and future badges; not used for text |
-| Accent | `--brand-rose` | #AC5F7A | field-error marker |
-| Accent | `--brand-coral` | #D37C7A | hero warm glow only |
-| Surface | `--surface-canvas` / `-raised` / `-tint` / `-warm` | #F7F6FD / #FFFFFF / #EEECFB / #FCE6E0 | app background / cards, inputs / selected + supportive panels / demo and urgent notices |
-| Line | `--line-soft` / `--line-strong` | #D9D6F0 / #8C86C9 | dividers / form-control borders (3.07:1 on canvas, WCAG 1.4.11) |
+| Foundation | `--brand-forest` | #073F29 | headings, nav text, dark hero, theme-color |
+| Interactive | `--brand-emerald` | #0D5E38 | primary buttons, links, selected nav (`--color-action`) |
+| Accent | `--brand-green` | #2A7A46 | focus ring, progress, icons, gradient end (`--color-accent`) |
+| Supporting | `--brand-moss` / `--brand-olive` | #39582B / #67783F | dark sections, illustration, decoration |
+| Premium | `--brand-gold` | #A38641 | gold gradient start, demo markers |
+| CTA | `--brand-amber` | #E59C40 | hero and final CTA buttons, illustration accents, demo card edge |
+| Light | `--brand-glow` | #67D678 | ambient glows only; never text, never a fill behind text |
+| Surfaces | `--surface-canvas` / `-raised` / `-tint` / `-ivory` / `-warm` | #F6F8F1 / #FFFFFF / #E7F0E3 / #FBF6E8 / #FBEFD5 | page / cards, inputs / selected + supportive / warm panels / notices |
+| Lines | `--line-soft` / `--line-strong` | #D3DFCF / #7B9680 | card borders / form-control borders (3:1 on canvas) |
 
-Legacy names (`--color-indigo`, `--color-periwinkle`, `--color-lavender`, `--color-peach`, `--color-white`, `--color-ink`, `--color-muted`, `--color-border`) remain as aliases so existing rules inherit the palette. Prefer the semantic names in new code.
+Semantic roles: `--color-heading`, `--color-action`, `--color-accent`, `--color-tint`, `--color-notice`, `--color-canvas`, `--color-ink`, `--color-muted`, `--color-border`, `--color-on-dark`, `--color-on-dark-muted`, `--color-gold-soft`. Use these in components, not the brand ramp, except for gradients and illustrations.
 
-## Style decisions
-- **Gradients**: indigo to violet only. `--gradient-hero` (hero), `--gradient-action` (primary button, FAB, selected topic). No other gradients.
-- **Grain**: `--texture-grain`, 6% opacity overlay, hero only. Removed under `prefers-reduced-transparency` and forced-colors.
-- **Glass**: header and bottom nav use `--glass-bg` + `--glass-blur`, inside `@supports`; solid fallback otherwise and under reduced transparency.
-- **Elevation**: `--shadow-card` (cards), `--shadow-raised` (hero, FAB, assistant panel), `--shadow-action` (primary button). No heavier shadows.
-- **Radii**: 12 button, 16 card, 24 feature, pill for badges/FAB.
-- **Motion**: 160ms `--ease-ios` on color, shadow and a 0.98 press scale. All animation and transition are disabled under `prefers-reduced-motion` (existing global rule).
-- **Typography** unchanged: Plus Jakarta Sans (headings), Inter (everything else).
-- **Icons**: Lucide only, 2px stroke. Medical set: House (home), BookHeart (learn), Hospital (clinics), ShieldPlus (hero, privacy + care), ShieldCheck (privacy-matched pathway links), MessageCircleHeart (guide), TriangleAlert (urgent).
-- **On dark**: the hero inverts the primary button to white-on-navy and uses `--color-on-dark` / `--color-on-dark-muted`.
+## Gradients and light
+`--gradient-hero` forest to emerald to green. `--gradient-dark` forest to moss (dark sections). `--gradient-action` emerald to green (primary buttons, selected chips, icon chips). `--gradient-gold` gold to amber (decorative only, never behind small text). `--glow-warm`, `--glow-cool`, `--glow-page` are low-opacity radial glows. `--texture-grain` is used on the hero and dark sections only; `--deco-leaf` is the faint corner leaf on cards.
+
+## Cards (`styles/cards.css`)
+- **Base**: raised surface, 20px radius, soft green-tinted shadow, 22px padding, faint corner leaf. Hierarchy comes from the icon chip (`.card-icon`, a Lucide medical pictogram), the type scale and spacing. **No permanent underlines and no rules under card titles.** Only `.btn--text` keeps an underline, as a conventional text button.
+- **Clickable** (`.article-card`, `.clinic-card`, care topics): the title link stretches over the whole card, an arrow glyph shows the affordance, hover lifts 3px and moves the arrow, press scales to 0.99, keyboard focus draws a ring on the card. Under `(hover: none)` there is no lift.
+- **Featured**: the urgent article spans the grid row on a warm gradient with a forest border; the top pathway match gets a tinted gradient and a filled rank badge.
+- **Informational / forms / admin** (`.card`, `.state-box`, `.staff-bar`): same surface, never animated.
+- **Grids**: 1 column on phones, 2 from 640px, 3 from 1000px (articles); clinics 2 columns from 820px.
+
+## Motion
+- Tokens: `--ease-ios`, `--duration-quick` 160ms, `--duration-base` 240ms, `--duration-slow` 600ms. Transform and opacity only.
+- CSS only, no JS and no dependency. Scroll reveals use `animation-timeline: view()` (landing sections and listing cards, with short staggers via `animation-range` offsets); hero layers drift with `animation-timeline: scroll(root)` from 900px; idle float and the hero glow run from 768px. Panels (assistant) fade and rise on open.
+- Browsers without `animation-timeline`, and anyone with `prefers-reduced-motion`, get the static page (global rule in `app.css` plus explicit media queries).
+- Never animated: forms, clinical information, appointment details, staff and admin screens.
+
+## Typography and icons
+Plus Jakarta Sans for headings and display, Inter for everything else. Icons are Lucide only at 2px stroke: House, BookHeart, Hospital, ShieldPlus, ShieldCheck, ClipboardCheck, Stethoscope, HeartPulse, MessageCircleHeart, TriangleAlert. The brand logo is `public/icons/kalinga-logo.png`.
 
 ## Contrast (computed in `a11y.test.tsx`, all >= 4.5:1)
-ink/canvas, ink/warm, ink/tint, muted/canvas, muted/tint, muted/raised, navy/canvas, action/canvas, action/tint, white on vivid, electric, midnight, royal, and muted-on-dark on royal/vivid. Focus ring electric on canvas 7.6:1.
+ink on canvas, warm notice and tint; muted on canvas, tint and raised; heading on canvas; action on canvas and tint; white on emerald, green, forest and moss; on-dark-muted on forest, emerald and moss; gold-soft on emerald and forest; forest on amber. Form borders on canvas are 3:1 or better.
 
-## Known follow-ups
-- `kalinga-logo.png` is the single brand icon (favicon, manifest, header). Its green/coral/gold artwork is outside the indigo UI palette; confirm that is intended.
-- Visual QA in a real browser at 360 / 768 / 1280 px has not been run in this change.
-
-## Parallax-inspired redesign (landing and shared screens)
-- **Landing** (`pages/Home.tsx`, `styles/landing.css`, copy in `i18n/home-messages.ts`): illustrated hero (`components/HeroIllustration.tsx`, original SVG: phone with shield-and-heart, clinic pin card, calendar card, leaves), urgent-guidance strip overlapping the hero edge, How it works (4 connected steps), Why KALINGA (asymmetric bento), Explore health information (purple-to-mauve band, links to real pages), Find the care you need (Privacy-Matched Pathway + clinics), Privacy and trust (dark), Final CTA, footer links. Sections overlap with large radii for the layered transitions and alternate light, tint, warm, light, dark.
-- **Motion is CSS only, no JS and no new dependency.** `.reveal` uses `animation-timeline: view()`; hero layers (`.px-back/.px-mid/.px-front`) use `animation-timeline: scroll(root)` at >= 900px only; idle float at >= 768px only. Browsers without `animation-timeline` render everything static and visible. `prefers-reduced-motion` disables all of it (global rule plus explicit media queries).
-- **Not animated:** forms, clinic information, appointment screens, staff and admin. Inner pages get only the tinted page glow, larger titles and gentle card hover.
-- **Tokens added:** `--gradient-warm` (purple to plum to mauve), `--gradient-glow` (plum to rose to coral, decorative only, never behind text), `--glow-page`, `--color-peach-soft`.
-- **Content rule:** no invented clinics, availability, claims or contact details; the footer states contact details are unavailable in this DEMO. All new copy is unreviewed DEMO text with a draft Filipino version.
+## Content rule
+No invented clinics, availability, claims or contact details. The footer states contact details are unavailable in this DEMO. All new copy is unreviewed DEMO text with a draft Filipino version.

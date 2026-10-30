@@ -85,3 +85,6 @@ APPROVED_SOP_ARTIFACT_MISSING (minors 15-17); final logo master; medical reviewe
 
 ## Design refresh: Brand Guidelines v1.0 palette
 Adopted the v1.0 indigo/violet/coral palette and iOS-inspired styling via tokens only (see docs/design-system.md). Legacy token names kept as aliases; token tests updated to the new values. Four-item nav unchanged; icons swapped within Lucide (BookHeart, Hospital, ShieldPlus, ShieldCheck, MessageCircleHeart).
+
+## Design refresh: forest-and-gold palette and card system
+Replaced the indigo/violet palette with forest-and-gold tokens; legacy --color-indigo/periwinkle/lavender/peach/white renamed to semantic names. Added cards.css (clickable stretched-link cards, no permanent underlines), staggered CSS-only entrances, amber CTA highlights. See docs/design-system.md.
