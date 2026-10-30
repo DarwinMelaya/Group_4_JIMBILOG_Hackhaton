@@ -13,11 +13,16 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
-    "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
-    "dev": "concurrently -k -n api,web \"npm run dev -w @kalinga/api\" \"npm run dev -w @kalinga/web\""
+    "test:loop": "bash scripts/test-stop-check.sh",
+    "verify": "npm run test:loop && npm run lint && npm run typecheck && npm run test && npm run build",
+    "dev": "concurrently -k -n api,web \"npm run dev -w @kalinga/api\" \"npm run dev -w @kalinga/web\"",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install chromium",
+    "dev:api-e2e": "npm run dev:start -w @kalinga/api"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
     "concurrently": "10.0.6",
     "eslint": "10.13.0",
     "globals": "17.13.0",

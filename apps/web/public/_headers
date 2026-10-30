@@ -1,0 +1,25 @@
+# KALINGA web security headers (Netlify / Cloudflare Pages `_headers` format).
+# Vite copies public/ to dist/, so this file ships at the root of the built site.
+# Static hosts that do not read `_headers` must reproduce these exact headers in their own config.
+#
+# Production policy is STRICT: no 'unsafe-inline', no 'unsafe-eval', no external origins, no nonces.
+# The built site needs none of them: every script (including /early-lang.js) and stylesheet is an
+# external same-origin file, there are no inline style attributes, fonts are self-hosted woff2, and
+# the API is called on the same origin (/api).
+#
+# Dev server only (`npm run dev`): vite.config.ts sends a relaxed copy of this policy because Vite's
+# React refresh preamble is an inline script, its HMR injects <style> tags and it talks over a
+# WebSocket. That difference lives in apps/web/security-headers.ts (devHeaders) and never applies to
+# `vite preview` or to the built site, which both use the headers below unchanged.
+# See docs/decision-log.md D-020.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The service worker script must always be revalidated so updates are noticed, and may control the whole origin.
+/sw.js
+  Cache-Control: no-cache
+  Service-Worker-Allowed: /

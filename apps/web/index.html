@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Defence in depth next to the Referrer-Policy header (public/_headers). A CSP is delivered by header only, not via meta. -->
+    <meta name="referrer" content="no-referrer" />
+    <!-- Sets html lang from the stored language before React mounts. External classic script (no inline code) so a CSP of script-src 'self' keeps working. -->
+    <script src="/early-lang.js"></script>
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#34496D" />
     <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />

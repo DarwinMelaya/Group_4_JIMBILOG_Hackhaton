@@ -34,3 +34,7 @@ Known flake, disclosed: `apps/api/src/db/db.test.ts` "persists to a data directo
 - 44px targets are asserted from CSS text, not measured boxes.
 - Filipino strings and the offline text remain unreviewed drafts; no clinical review has occurred.
 - No end-to-end test through a browser; the proxy was verified with curl only.
+
+## S2-S9 and the DEMO assistant
+
+Evidence for slices S2 to S9 (articles, pathway, clinics, booking, staff, governance, care/reminders/reports, Playwright e2e) and the assistant is summarized in `docs/implementation-status.md`: last known full `npm run verify` was 388 API + 461 web + 17 shared tests, `test:loop` 14/14, lint/typecheck/build green, and Playwright e2e 9/9 in Chromium (desktop viewport). Per-item maker and checker evidence is in `LOOP.md` (many S2-S8 items were checked in FAST MODE with targeted tests; full verify was run after S9). Not tested: real devices, screen readers, rendered contrast in browsers, slow networks, load, penetration testing. See `docs/launch-gates.md`.

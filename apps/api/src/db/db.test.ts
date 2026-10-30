@@ -102,6 +102,8 @@ describe('openDatabase', () => {
     const r = await b.query<{ c: number }>("select count(*)::int as c from app_config where key = 'test.persist'");
     expect(r.rows[0]?.c).toBe(1);
     const m = await b.query<{ c: number }>('select count(*)::int as c from schema_migrations');
-    expect(m.rows[0]?.c).toBe(1);
+    // One row per migration file (grows as migrations are added; was a hardcoded 1 before S2-1).
+    const expected = (await readdir(DEFAULT_MIGRATIONS_DIR)).filter((f) => /^\d{4}_[a-z0-9_]+\.sql$/.test(f)).length;
+    expect(m.rows[0]?.c).toBe(expected);
   });
 });

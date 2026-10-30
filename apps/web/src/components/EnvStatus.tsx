@@ -1,11 +1,31 @@
+import { useSyncExternalStore } from 'react';
 import { usePublicConfig } from '../api/usePublicConfig';
 import { useI18n } from '../i18n/I18nProvider';
+
+function subscribeOnline(onChange: () => void): () => void {
+  window.addEventListener('online', onChange);
+  window.addEventListener('offline', onChange);
+  return () => {
+    window.removeEventListener('online', onChange);
+    window.removeEventListener('offline', onChange);
+  };
+}
+
+/** Live browser connectivity: re-renders on window online/offline events (unknown counts as online). */
+export function useOnlineStatus(): boolean {
+  return useSyncExternalStore(
+    subscribeOnline,
+    () => navigator.onLine !== false,
+    () => true,
+  );
+}
 
 /** Footer status line: environment state as reported by GET /api/v1/public/config. */
 export function EnvStatus() {
   const { t } = useI18n();
   const { data, isPending, isError } = usePublicConfig();
-  const offline = typeof navigator !== 'undefined' && navigator.onLine === false;
+  const online = useOnlineStatus();
+  const offline = !online;
 
   let text: string;
   if (data) {

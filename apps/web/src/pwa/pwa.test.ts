@@ -80,7 +80,7 @@ describe('sw.js in a vm sandbox', () => {
         if (!stores.has(n)) stores.set(n, new Map());
         const s = stores.get(n)!;
         return {
-          addAll: async (urls: string[]) => urls.forEach((u) => s.set(u, `precached:${u}`)),
+          add: async (u: string) => void s.set(u, `precached:${u}`),
           put: async (r: { url: string }, v: unknown) => void s.set(r.url, v),
         };
       },

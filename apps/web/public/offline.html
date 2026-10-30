@@ -5,13 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#34496D" />
 <title>KALINGA (DEMO) - Offline / Walang koneksyon</title>
-<style>
-body{margin:0;padding:24px;background:#FAFBFE;color:#1D2C43;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
-main{max-width:36rem;margin:0 auto}
-h1{color:#34496D;font-size:1.5rem}
-.card{background:#E9EDFC;border:1px solid #DDE3F0;border-radius:16px;padding:16px;margin:16px 0}
-button{min-height:44px;padding:0 20px;border-radius:12px;border:0;background:#586AA7;color:#fff;font:inherit}
-</style>
+<link rel="stylesheet" href="/offline.css" />
 </head>
 <body>
 <main>
@@ -25,7 +19,8 @@ button{min-height:44px;padding:0 20px;border-radius:12px;border:0;background:#58
 <p>Pampublikong impormasyon lamang ang makikita kapag offline. Kailangan ng internet para sa pag-request ng appointment at pag-check ng status. Walang pribadong datos na naka-save sa device na ito.</p>
 <p><small>Draft na salin, hindi pa nasusuri ng eksperto.</small></p>
 </div>
-<p><button type="button" onclick="location.reload()">Try again / Subukan muli</button></p>
+<p><button type="button" id="retry">Try again / Subukan muli</button></p>
 </main>
+<script src="/offline.js"></script>
 </body>
 </html>

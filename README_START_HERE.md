@@ -53,3 +53,8 @@ The intended workflow relies on standard project `SKILL.md` with YAML frontmatte
 
 - `npm install` once, then `npm run dev` starts the API (http://localhost:3001) and the web app (http://localhost:5173) together. The web dev server proxies `/api` to the API (override with `API_PORT`), so the browser needs no CORS. Press Ctrl+C to stop both.
 - `npm run verify` runs lint, typecheck, all tests and builds. Evidence of what has actually been run is in `docs/slice-test-evidence.md`.
+- Real-browser end-to-end suite (S9-1, Playwright + Chromium, DEMO data only): `npm run test:e2e:install` once (downloads Chromium, needs network), then `npm run test:e2e` (about 1 minute including a production web build; NOT part of `npm run verify`). It starts the API on port 3101 (`DEMO_MODE=true`, in-memory database, seeded fictitious data) and a `vite preview` of the production build on port 4173 (strict CSP headers, service worker, `/api` proxy), so ports 3101 and 4173 must be free. Specs are in `e2e/`.
+
+### Prototype status
+
+This is a local DEMO prototype, not a service that is ready for real users. All clinics, articles and translations are DEMO and unreviewed, Filipino text is a draft, DEMO staff accounts exist only in demo mode, reminders are mock-only (no real SMS or e-mail), and a booking submission is a request, not a confirmation. What is built and what was actually tested: `docs/implementation-status.md`. What must happen before any real use (clinical, legal, partner, security and accessibility gates, all open): `docs/launch-gates.md`.

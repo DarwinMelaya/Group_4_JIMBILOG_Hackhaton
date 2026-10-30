@@ -34,12 +34,13 @@ section() { printf '%s\n' "$CLEAN" | awk -v h="$1" '$0==h{f=1;next} /^## /{f=0} 
 # 1. Exactly one **Status:** line, and its value begins with a legal state.
 status_count="$(printf '%s\n' "$CLEAN" | grep -cE '^\*\*Status:\*\*' || true)"
 [ "$status_count" = "1" ] || err "expected exactly one **Status:** line, found $status_count"
-printf '%s\n' "$CLEAN" | grep -qE '^\*\*Status:\*\* (active|paused|halted)( |$|\()' \
+printf '%s\n' "$CLEAN" | grep -E '^\*\*Status:\*\* (active|paused|halted)( |$|\()' >/dev/null \
   || err "**Status:** must begin with active, paused, or halted"
 
 # 2. Required sections all present.
 for s in "## Open" "## Done" "## Blocked" "## Cycle log"; do
-  printf '%s\n' "$CLEAN" | grep -qF "$s" || err "missing required section: $s"
+  # no -q: an early-exiting grep would SIGPIPE the writer under pipefail on a large LOOP.md
+  printf '%s\n' "$CLEAN" | grep -F "$s" >/dev/null || err "missing required section: $s"
 done
 
 # 3. Every bullet under ## Done carries evidence — no green, no Done.
