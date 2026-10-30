@@ -35,3 +35,10 @@ ink/canvas, ink/warm, ink/tint, muted/canvas, muted/tint, muted/raised, navy/can
 ## Known follow-ups
 - `kalinga-logo.png` is the single brand icon (favicon, manifest, header). Its green/coral/gold artwork is outside the indigo UI palette; confirm that is intended.
 - Visual QA in a real browser at 360 / 768 / 1280 px has not been run in this change.
+
+## Parallax-inspired redesign (landing and shared screens)
+- **Landing** (`pages/Home.tsx`, `styles/landing.css`, copy in `i18n/home-messages.ts`): illustrated hero (`components/HeroIllustration.tsx`, original SVG: phone with shield-and-heart, clinic pin card, calendar card, leaves), urgent-guidance strip overlapping the hero edge, How it works (4 connected steps), Why KALINGA (asymmetric bento), Explore health information (purple-to-mauve band, links to real pages), Find the care you need (Privacy-Matched Pathway + clinics), Privacy and trust (dark), Final CTA, footer links. Sections overlap with large radii for the layered transitions and alternate light, tint, warm, light, dark.
+- **Motion is CSS only, no JS and no new dependency.** `.reveal` uses `animation-timeline: view()`; hero layers (`.px-back/.px-mid/.px-front`) use `animation-timeline: scroll(root)` at >= 900px only; idle float at >= 768px only. Browsers without `animation-timeline` render everything static and visible. `prefers-reduced-motion` disables all of it (global rule plus explicit media queries).
+- **Not animated:** forms, clinic information, appointment screens, staff and admin. Inner pages get only the tinted page glow, larger titles and gentle card hover.
+- **Tokens added:** `--gradient-warm` (purple to plum to mauve), `--gradient-glow` (plum to rose to coral, decorative only, never behind text), `--glow-page`, `--color-peach-soft`.
+- **Content rule:** no invented clinics, availability, claims or contact details; the footer states contact details are unavailable in this DEMO. All new copy is unreviewed DEMO text with a draft Filipino version.

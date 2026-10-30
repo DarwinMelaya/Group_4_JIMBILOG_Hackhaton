@@ -36,12 +36,16 @@
   --color-action: var(--brand-vivid);        /* primary buttons, links */
   --color-on-dark: #FFFFFF;
   --color-on-dark-muted: #D8D5F7;
+  --color-peach-soft: #F6C3BB;               /* light coral tint for small text on dark (7:1 on vivid) */
 
   /* Gradients: indigo to violet only, kept to hero, primary action and selected states. */
   --gradient-hero: linear-gradient(135deg, var(--brand-midnight) 0%, var(--brand-royal) 55%, var(--brand-vivid) 100%);
   --gradient-action: linear-gradient(135deg, var(--brand-vivid) 0%, var(--brand-electric) 100%);
   --glow-warm: radial-gradient(60% 60% at 85% 10%, rgb(211 124 122 / 0.35) 0%, rgb(211 124 122 / 0) 70%);
-  --glow-cool: radial-gradient(50% 50% at 10% 100%, rgb(64 37 225 / 0.45) 0%, rgb(64 37 225 / 0) 70%);
+  --gradient-warm: linear-gradient(160deg, var(--brand-purple) 0%, var(--brand-plum) 65%, var(--brand-mauve) 100%);
+  --gradient-glow: linear-gradient(135deg, var(--brand-plum) 0%, var(--brand-rose) 55%, var(--brand-coral) 100%);
+  --glow-page: radial-gradient(60% 100% at 85% 0, rgb(64 37 225 / 0.1), transparent 70%), radial-gradient(40% 80% at 0 0, rgb(211 124 122 / 0.12), transparent 70%);
+  --glow-cool:radial-gradient(50% 50% at 10% 100%, rgb(64 37 225 / 0.45) 0%, rgb(64 37 225 / 0) 70%);
 
   /* Very subtle grain (SVG turbulence, inline data URI; allowed by img-src 'self' data:). Applied only to the hero. */
   --texture-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");

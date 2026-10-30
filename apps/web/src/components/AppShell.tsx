@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 import { NavLinks } from './NavLinks';
 import { EnvStatus } from './EnvStatus';
+import { FooterLinks } from './FooterLinks';
 import { LocaleSwitch } from './LocaleSwitch';
 import { UpdatePrompt } from './UpdatePrompt';
 import { AssistantWidget } from '../assistant/AssistantWidget';
@@ -9,6 +10,7 @@ import { useI18n } from '../i18n/I18nProvider';
 
 export function AppShell() {
   const { t, needsReviewNotice, announcement, announcementId } = useI18n();
+  const isLanding = useLocation().pathname === '/';
   return (
     <>
       <a href="#main" className="skip-link">{t('a11y.skipToContent')}</a>
@@ -36,10 +38,10 @@ export function AppShell() {
           <LocaleSwitch />
         </div>
       </header>
-      <main id="main" className="main">
+      <main id="main" className={isLanding ? 'main main--landing' : 'main'}>
         <Outlet />
       </main>
-      <EnvStatus />
+      <EnvStatus><FooterLinks /></EnvStatus>
       <NavLinks variant="mobile" />
       <AssistantWidget />
     </>

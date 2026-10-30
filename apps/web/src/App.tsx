@@ -6,6 +6,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import './styles/tokens.css';
 import './styles/app.css';
+import './styles/landing.css';
 import { I18nProvider } from './i18n/I18nProvider';
 import { AppShell }from './components/AppShell';
 import { Home } from './pages/Home';

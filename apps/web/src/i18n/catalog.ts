@@ -1,6 +1,7 @@
 import type { Locale } from '@kalinga/shared';
 import { careEn, careFil } from './care-messages';
 import { assistantEn, assistantFil } from './assistant-messages';
+import { homeEn, homeFil } from './home-messages';
 import { reportEn, reportFil } from './report-messages';
 
 /** Per-entry review state. Nothing in this prototype is medically approved. */
@@ -738,6 +739,7 @@ export const en = {
   'admin.evidence.type.fee_confirmation': u('Fee confirmation'),
   'admin.evidence.type.privacy_practice_confirmation': u('Privacy practice confirmation'),
   ...careEn,
+  ...homeEn,
   ...assistantEn,
   ...reportEn,
 } as const satisfies Record<string, CatalogEntry>;
@@ -1474,6 +1476,7 @@ export const fil: Catalog = {
   'admin.evidence.type.fee_confirmation': u('Kumpirmasyon ng bayad'),
   'admin.evidence.type.privacy_practice_confirmation': u('Kumpirmasyon ng gawi sa privacy'),
   ...careFil,
+  ...homeFil,
   ...assistantFil,
   ...reportFil,
 };

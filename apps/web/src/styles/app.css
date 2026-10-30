@@ -3,7 +3,7 @@ html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
-  background: var(--color-white);
+  background: var(--color-white) var(--glow-page) no-repeat top center / 100% 480px;
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: 16px;

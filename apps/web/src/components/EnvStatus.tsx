@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react';
+import { useSyncExternalStore, type ReactNode } from 'react';
 import { usePublicConfig } from '../api/usePublicConfig';
 import { useI18n } from '../i18n/I18nProvider';
 
@@ -21,7 +21,7 @@ export function useOnlineStatus(): boolean {
 }
 
 /** Footer status line: environment state as reported by GET /api/v1/public/config. */
-export function EnvStatus() {
+export function EnvStatus({ children }: { children?: ReactNode } = {}) {
   const { t } = useI18n();
   const { data, isPending, isError } = usePublicConfig();
   const online = useOnlineStatus();
@@ -42,6 +42,7 @@ export function EnvStatus() {
 
   return (
     <footer className="site-footer">
+      {children}
       <p className="env-status" aria-live="polite" data-state={data ? 'ready' : isError ? 'error' : 'loading'}>
         <span className="env-status__label">{t('env.label')}</span> {text}
       </p>
