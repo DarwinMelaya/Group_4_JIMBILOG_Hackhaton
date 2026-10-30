@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Compass } from 'lucide-react';
+import { ShieldPlus } from 'lucide-react';
 import { URGENT_ARTICLE_SLUG } from '@kalinga/shared';
 import { useI18n } from '../i18n/I18nProvider';
 
@@ -18,7 +18,7 @@ export function Home() {
           <p className="hero__note">{t('home.hero.privacyNote')}</p>
         </div>
         <div className="hero__art" aria-hidden="true">
-          <Compass size={96} strokeWidth={1.5} />
+          <ShieldPlus size={96} strokeWidth={1.5} />
         </div>
       </section>
       <section className="card" aria-labelledby="urgent-title">

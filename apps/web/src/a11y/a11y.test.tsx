@@ -179,7 +179,12 @@ describe('44px targets, focus and reduced motion (CSS assertions)', () => {
 });
 
 describe('contrast of declared token pairs (WCAG AA, computed)', () => {
-  const hex = (name: string) => tokensCss.match(new RegExp(`${name}:\\s*(#[0-9A-Fa-f]{6});`))?.[1] ?? '';
+  // Resolves a token through var() aliases down to its hex value.
+  const hex = (name: string): string => {
+    const v = tokensCss.match(new RegExp(`${name}:\\s*([^;]+);`))?.[1]?.trim() ?? '';
+    const ref = v.match(/^var\((--[\w-]+)\)$/);
+    return ref ? hex(ref[1] as string) : v;
+  };
   const lum = (h: string) => {
     const c = [1, 3, 5]
       .map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
@@ -197,6 +202,18 @@ describe('contrast of declared token pairs (WCAG AA, computed)', () => {
     ['--color-muted', '--color-white'],
     ['--color-indigo', '--color-white'],
     ['--color-white', '--color-indigo'],
+    ['--color-action', '--color-white'],
+    ['--color-action', '--color-lavender'],
+    ['--color-on-dark', '--brand-vivid'],
+    ['--color-on-dark', '--brand-electric'],
+    ['--color-on-dark', '--brand-midnight'],
+    ['--color-on-dark', '--brand-royal'],
+    ['--color-on-dark-muted', '--brand-royal'],
+    ['--color-on-dark-muted', '--brand-vivid'],
+    ['--brand-navy', '--color-on-dark'],
+    ['--color-ink', '--surface-warm'],
+    ['--color-muted', '--surface-tint'],
+    ['--color-muted', '--surface-raised'],
   ])('%s on %s is at least 4.5:1', (fg, bg) => {
     expect(ratio(fg, bg)).toBeGreaterThanOrEqual(4.5);
   });

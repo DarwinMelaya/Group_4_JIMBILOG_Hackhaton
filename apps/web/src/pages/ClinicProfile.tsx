@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Compass } from 'lucide-react';
+import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { PRIVACY_PRACTICE_KEYS, type ClinicDetail } from '@kalinga/shared';
 import { useClinic } from '../api/clinics';
 import { useBookingConfig } from '../api/bookings';
@@ -161,7 +161,7 @@ function Profile({ clinic }: { clinic: ClinicDetail }) {
       <div className="actions">
         <BookingCta clinicSlug={clinic.slug} enabled={booking.isSuccess} />
         <Link to="/pathway" className="btn btn--secondary">
-          <Compass size={18} aria-hidden="true" /> {t('clinics.profile.pathway')}
+          <ShieldCheck size={18} aria-hidden="true" /> {t('clinics.profile.pathway')}
         </Link>
       </div>
       {bookingOff && <p className="field-hint">{t('clinics.booking.unavailable')}</p>}

@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Compass } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import {
   CLINIC_SERVICE_CATEGORIES,
   MUNICIPALITIES,
@@ -104,7 +104,7 @@ export function Clinics() {
         <h2 id="clinics-pathway-title">{t('clinics.pathway.title')}</h2>
         <p>{t('clinics.pathway.body')}</p>
         <Link to="/pathway" className="btn btn--secondary">
-          <Compass size={18} aria-hidden="true" /> {t('clinics.pathway.cta')}
+          <ShieldCheck size={18} aria-hidden="true" /> {t('clinics.pathway.cta')}
         </Link>
       </section>
 

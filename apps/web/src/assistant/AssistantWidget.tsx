@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import type { Locale } from '@kalinga/shared';
-import { MessageCircle, TriangleAlert, X } from 'lucide-react';
+import { MessageCircleHeart, TriangleAlert, X } from 'lucide-react';
 import { useI18n } from '../i18n/I18nProvider';
 import { MAX_INPUT_LENGTH, clampInput, matchIntent } from './engine';
 import { GREETING_INTENT_ID, chipLabelId, getIntent, quickRepliesFor, type Intent, type IntentId } from './registry';
@@ -39,7 +39,7 @@ export function AssistantWidget() {
         aria-controls={open ? panelId : undefined}
         onClick={() => (open ? close() : setOpen(true))}
       >
-        <MessageCircle size={24} aria-hidden="true" />
+        <MessageCircleHeart size={24} aria-hidden="true" />
         <span>{t('assistant.open')}</span>
       </button>
       {open && <AssistantPanel id={panelId} onClose={close} />}

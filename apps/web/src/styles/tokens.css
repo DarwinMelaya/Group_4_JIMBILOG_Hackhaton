@@ -1,19 +1,68 @@
-/* KALINGA Palette B tokens (master prompt section 3). Values are locked; do not alter without brand approval. */
+/* KALINGA design tokens, Brand Guidelines v1.0 refresh. Layers: brand ramp -> semantic roles -> component use.
+   Components read the semantic roles (and the legacy --color-* names below); only this file holds raw hex. */
 :root {
-  --color-indigo: #34496D;       /* Deep Indigo: primary brand/headings/nav */
-  --color-periwinkle: #586AA7;   /* interactive accents and pathway progress */
-  --color-lavender: #E9EDFC;     /* Cloud Lavender supportive panels */
-  --color-rose: #D78FA3;         /* Dusty Rose limited compassion accents */
-  --color-peach: #F4C9AA;        /* Peach Glow limited warm highlights */
-  --color-white: #FAFBFE;        /* Canvas White app background */
-  --color-ink: #1D2C43;          /* Slate Ink primary copy */
-  --color-muted: #52627B;        /* Muted Blue Gray secondary copy */
-  --color-border: #DDE3F0;       /* Soft Border field/divider strokes */
+  /* Brand ramp (Brand Guidelines v1.0). Foundations: midnight/navy. Interactive: vivid/electric. Accents: purple, mauve, rose, coral. */
+  --brand-midnight: #101440;     /* Midnight Indigo */
+  --brand-navy: #161955;         /* Deep Navy */
+  --brand-royal: #221F6E;        /* Royal Indigo */
+  --brand-vivid: #261CA3;        /* Vivid Indigo */
+  --brand-electric: #4025E1;     /* Electric Violet */
+  --brand-purple: #3E2A75;       /* Muted Purple */
+  --brand-plum: #613979;         /* Plum Violet */
+  --brand-mauve: #86497B;        /* Dusty Mauve */
+  --brand-rose: #AC5F7A;         /* Muted Rose */
+  --brand-coral: #D37C7A;        /* Warm Coral Peach */
+
+  /* Tinted neutrals and surfaces (complementary, not in the brand ramp). */
+  --surface-canvas: #F7F6FD;     /* app background: near-white, faint violet */
+  --surface-raised: #FFFFFF;     /* cards, inputs */
+  --surface-tint: #EEECFB;       /* supportive panels, selected states */
+  --surface-warm: #FCE6E0;       /* warm notices (demo banner, urgent) */
+  --line-soft: #D9D6F0;          /* dividers, field strokes */
+  --line-strong: #8C86C9;        /* strong input borders (3:1 non-text contrast on canvas) */
+  --text-primary: #101440;
+  --text-secondary: #46456F;
+
+  /* Legacy names kept so existing component rules inherit the refresh. */
+  --color-indigo: var(--brand-navy);        /* headings, brand text, nav */
+  --color-periwinkle: var(--brand-electric); /* interactive accents, focus, progress */
+  --color-lavender: var(--surface-tint);
+  --color-rose: var(--brand-rose);
+  --color-peach: var(--surface-warm);
+  --color-white: var(--surface-canvas);
+  --color-ink: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-border: var(--line-soft);
+  --color-action: var(--brand-vivid);        /* primary buttons, links */
+  --color-on-dark: #FFFFFF;
+  --color-on-dark-muted: #D8D5F7;
+
+  /* Gradients: indigo to violet only, kept to hero, primary action and selected states. */
+  --gradient-hero: linear-gradient(135deg, var(--brand-midnight) 0%, var(--brand-royal) 55%, var(--brand-vivid) 100%);
+  --gradient-action: linear-gradient(135deg, var(--brand-vivid) 0%, var(--brand-electric) 100%);
+  --glow-warm: radial-gradient(60% 60% at 85% 10%, rgb(211 124 122 / 0.35) 0%, rgb(211 124 122 / 0) 70%);
+  --glow-cool: radial-gradient(50% 50% at 10% 100%, rgb(64 37 225 / 0.45) 0%, rgb(64 37 225 / 0) 70%);
+
+  /* Very subtle grain (SVG turbulence, inline data URI; allowed by img-src 'self' data:). Applied only to the hero. */
+  --texture-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* Elevation: two soft, indigo-tinted levels. */
+  --shadow-card: 0 1px 2px rgb(16 20 64 / 0.06), 0 4px 16px rgb(16 20 64 / 0.06);
+  --shadow-raised: 0 2px 4px rgb(16 20 64 / 0.08), 0 12px 32px rgb(16 20 64 / 0.14);
+  --shadow-action: 0 2px 8px rgb(38 28 163 / 0.35);
+
+  /* Frosted glass (header, bottom nav). Solid fallback below when backdrop-filter is unsupported. */
+  --glass-bg: rgb(247 246 253 / 0.82);
+  --glass-blur: saturate(160%) blur(14px);
+
   --space-unit: 8px;
   --radius-button: 12px;
   --radius-card: 16px;
   --radius-feature: 24px;
+  --radius-pill: 999px;
   --touch-target: 44px;
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-quick: 160ms;
   --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }

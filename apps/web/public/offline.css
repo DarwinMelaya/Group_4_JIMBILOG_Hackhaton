@@ -1,5 +1,6 @@
-body{margin:0;padding:24px;background:#FAFBFE;color:#1D2C43;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
+body{margin:0;padding:24px;background:#F7F6FD;color:#101440;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}
 main{max-width:36rem;margin:0 auto}
-h1{color:#34496D;font-size:1.5rem}
-.card{background:#E9EDFC;border:1px solid #DDE3F0;border-radius:16px;padding:16px;margin:16px 0}
-button{min-height:44px;padding:0 20px;border-radius:12px;border:0;background:#586AA7;color:#fff;font:inherit}
+h1{color:#161955;font-size:1.5rem}
+.card{background:#fff;border:1px solid #D9D6F0;border-radius:16px;padding:16px;margin:16px 0;box-shadow:0 1px 2px rgba(16,20,64,.06),0 4px 16px rgba(16,20,64,.06)}
+button{min-height:44px;padding:0 20px;border-radius:12px;border:0;background:linear-gradient(135deg,#261CA3,#4025E1);color:#fff;font:inherit;font-weight:600}
+button:focus-visible{outline:3px solid #4025E1;outline-offset:2px}
