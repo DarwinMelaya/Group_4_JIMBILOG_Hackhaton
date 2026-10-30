@@ -8,6 +8,10 @@ import type { CatalogEntry } from './catalog';
 const u = (text: string): CatalogEntry => ({ text, review: 'unreviewed' });
 
 export const assistantEn = {
+  'assistant.tagline': u('Kalinga AI · scripted DEMO'),
+  'assistant.typing': u('KAI is typing'),
+  'assistant.suggest': u('More suggested questions'),
+  'assistant.suggestMenu': u('Suggested questions'),
   'assistant.chip.pathway': u('Help me choose a clinic'),
   'assistant.chip.profile': u('What is on a clinic profile?'),
   'assistant.chip.booking': u('How do I request an appointment?'),
@@ -29,6 +33,10 @@ export const assistantEn = {
 } as const satisfies Record<string, CatalogEntry>;
 
 export const assistantFil = {
+  'assistant.tagline': u('Kalinga AI · naka-script na DEMO'),
+  'assistant.typing': u('Nagta-type si KAI'),
+  'assistant.suggest': u('Higit pang mungkahing tanong'),
+  'assistant.suggestMenu': u('Mga mungkahing tanong'),
   'assistant.chip.pathway': u('Tulungan akong pumili ng klinika'),
   'assistant.chip.profile': u('Ano ang nasa profile ng klinika?'),
   'assistant.chip.booking': u('Paano humiling ng appointment?'),

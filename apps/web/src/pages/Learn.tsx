@@ -4,6 +4,7 @@ import { BookHeart, TriangleAlert } from 'lucide-react';
 import { ARTICLE_TOPICS, type ArticleTopic } from '@kalinga/shared';
 import { useArticles } from '../api/articles';
 import { ReviewBadge } from '../components/ReviewBadge';
+import { TopicScroller } from '../components/TopicScroller';
 import { UrgentPepBanner } from '../components/UrgentPepBanner';
 import { useI18n } from '../i18n/I18nProvider';
 import { formatNumber } from '../i18n/format';
@@ -50,7 +51,7 @@ export function Learn() {
 
       <section aria-labelledby="learn-topics-title">
         <h2 id="learn-topics-title">{t('learn.topics.title')}</h2>
-        <ul className="topic-grid">
+        <TopicScroller>
           <li>
             <button type="button" className="topic-card" aria-pressed={topic === undefined} onClick={() => setTopic(undefined)}>
               {t('learn.topics.all')}
@@ -63,7 +64,7 @@ export function Learn() {
               </button>
             </li>
           ))}
-        </ul>
+        </TopicScroller>
       </section>
 
       <section aria-labelledby="learn-results-title" aria-busy={isPending}>

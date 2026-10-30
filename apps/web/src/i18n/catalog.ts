@@ -71,7 +71,7 @@ export const en = {
     'Talk to KAI',
   ),
   'assistant.title': u(
-    'How may I help you?',
+    'KAI, your Kalinga guide',
   ),
   'assistant.label': u(
     'DEMO guide assistant',
@@ -122,7 +122,7 @@ export const en = {
     'Change language',
   ),
   'assistant.reply.greeting': u(
-    'Hello. I am a scripted DEMO guide. I can point you to pages in this prototype. Choose a quick reply or type a short question.',
+    "Hi, I'm KAI, short for Kalinga AI. I'm a scripted DEMO guide, so I can point you to pages in this prototype. Pick a suggestion or type a short question.",
   ),
   'assistant.reply.start': u(
     'A good first step is to read the Learn pages, then look at testing options in Clinics. You can go at your own pace and you do not need to sign in.',
@@ -156,6 +156,8 @@ export const en = {
   'learn.search.hint': u('Search by title or summary'),
   'learn.topics.title': u('Browse by topic'),
   'learn.topics.all': u('All topics'),
+  'learn.topics.prev': u('Show earlier topics'),
+  'learn.topics.next': u('Show more topics'),
   'learn.topic.basics': u('STI basics'),
   'learn.topic.common-stis': u('Common STIs'),
   'learn.topic.symptoms': u('Symptoms and no symptoms'),
@@ -805,10 +807,10 @@ export const fil: Catalog = {
   'env.notifications.mock': u('mock lamang ang mga abiso'),
   'env.booking.disabled': u('naka-disable ang totoong booking'),
   'assistant.open': u(
-    'DEMO na gabay',
+    'Kausapin si KAI',
   ),
   'assistant.title': u(
-    'DEMO na gabay',
+    'KAI, ang iyong gabay sa Kalinga',
   ),
   'assistant.label': u(
     'DEMO na katulong na gabay',
@@ -859,7 +861,7 @@ export const fil: Catalog = {
     'Palitan ang wika',
   ),
   'assistant.reply.greeting': u(
-    'Kumusta. Isa akong naka-script na DEMO na gabay. Maituturo kita sa mga pahina ng prototype na ito. Pumili ng mabilis na sagot o mag-type ng maikling tanong.',
+    'Kumusta, ako si KAI, maikli para sa Kalinga AI. Isa akong naka-script na DEMO na gabay, kaya maituturo kita sa mga pahina ng prototype na ito. Pumili ng mungkahi o mag-type ng maikling tanong.',
   ),
   'assistant.reply.start': u(
     'Magandang unang hakbang ang basahin ang mga pahina sa Alamin, saka tingnan ang mga opsyon sa pagpapasuri sa Mga Klinika. Sa sarili mong bilis, at hindi mo kailangang mag-sign in.',
@@ -893,6 +895,8 @@ export const fil: Catalog = {
   'learn.search.hint': u('Maghanap ayon sa pamagat o buod'),
   'learn.topics.title': u('Mag-browse ayon sa paksa'),
   'learn.topics.all': u('Lahat ng paksa'),
+  'learn.topics.prev': u('Ipakita ang mga naunang paksa'),
+  'learn.topics.next': u('Ipakita ang higit pang paksa'),
   'learn.topic.basics': u('Mga batayan ng STI'),
   'learn.topic.common-stis': u('Karaniwang mga STI'),
   'learn.topic.symptoms': u('Mga sintomas at kawalan ng sintomas'),

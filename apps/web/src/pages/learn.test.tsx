@@ -84,7 +84,10 @@ describe('Learn page', () => {
       `/learn/${URGENT_ARTICLE_SLUG}`,
     );
     const topics = screen.getByRole('region', { name: 'Browse by topic' });
-    expect(within(topics).getAllByRole('button')).toHaveLength(ARTICLE_TOPICS.length + 1);
+    const chips = within(topics).getAllByRole('button').filter((b) => b.hasAttribute('aria-pressed'));
+    expect(chips).toHaveLength(ARTICLE_TOPICS.length + 1);
+    // Mouse users get previous/next buttons for the one-line row; they are not topics.
+    expect(within(topics).getByRole('button', { name: 'Show more topics' })).toBeInTheDocument();
     expect(await screen.findByRole('link', { name: 'Prevention: an overview' })).toHaveAttribute('href', '/learn/prevention-overview');
     expect(screen.getAllByText('DEMO – not medically reviewed').length).toBe(2);
     expect(screen.queryByText(/medically reviewed and published/i)).not.toBeInTheDocument();

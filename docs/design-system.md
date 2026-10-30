@@ -42,3 +42,8 @@ ink on canvas, warm notice and tint; muted on canvas, tint and raised; heading o
 
 ## Content rule
 No invented clinics, availability, claims or contact details. The footer states contact details are unavailable in this DEMO. All new copy is unreviewed DEMO text with a draft Filipino version.
+
+## KAI (Kalinga AI) assistant
+- **Persona and mark**: `components/KaiAvatar.tsx` is KAI's own logo: a forest-to-green squircle holding the Symbolic K (stem plus a gold-amber leaf and a glow-green leaf, echoing the KALINGA logo) with a four-point gold spark for the "AI". Shown in the launcher, the panel header (with an online dot) and beside every KAI message. Inline SVG, no inline style attributes (CSP).
+- **Chat flow** (`assistant/AssistantWidget.tsx`, `styles/assistant.css`): the panel opens with KAI's greeting and the quick-reply chips. After the first message (chip or typed) the chips are removed, the panel widens and the log grows, and a small sparkle button beside the input opens a dropdown with the remaining suggestions (already-asked ones drop out; Escape closes the dropdown before the chat).
+- **Feels like chatting**: user and KAI bubbles with pop-in, and a typing indicator for 600 ms (`REPLY_DELAY_MS`) before each scripted reply. The typing state is announced as "KAI is typing". Everything stays local: no network, no storage, no model; the DEMO disclaimer stays visible.

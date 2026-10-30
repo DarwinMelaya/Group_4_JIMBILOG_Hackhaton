@@ -7,7 +7,7 @@ import type { CatalogEntry } from './catalog';
 const u = (text: string): CatalogEntry => ({ text, review: 'unreviewed' });
 
 export const homeEn = {
-  'landing.hero.eyebrow': u('A private guide to sexual health'),
+  'landing.hero.eyebrow': u('Knowledge and Access Link for STI Navigation, Guidance, and Assistance'),
   'landing.hero.art': u('Illustration: a phone showing a shield with a heart, surrounded by leaves, a clinic pin and a calendar.'),
   'landing.how.title': u('How KALINGA works'),
   'landing.how.intro': u('Four calm steps from first question to a clinic visit. Skip or leave at any point.'),

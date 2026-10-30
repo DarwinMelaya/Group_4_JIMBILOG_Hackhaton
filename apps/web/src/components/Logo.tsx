@@ -8,7 +8,6 @@ export function Logo() {
     <Link to="/" className="logo" aria-label={t('brand.homeLabel')}>
       <img className="logo__mark" src="/icons/kalinga-logo.png" alt="" width="32" height="32" />
       <span>KALINGA</span>
-      <span className="logo__badge">DEMO</span>
     </Link>
   );
 }

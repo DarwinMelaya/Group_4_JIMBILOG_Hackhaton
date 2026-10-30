@@ -42,8 +42,9 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
-const trigger = (name = 'DEMO guide') => screen.getByRole('button', { name });
-async function openGuide(name = 'DEMO guide') {
+const settle = (d: HTMLElement) => waitFor(() => expect(d.querySelector('.assistant__typing')).toBeNull());
+const trigger = (name = 'Talk to KAI') => screen.getByRole('button', { name });
+async function openGuide(name = 'Talk to KAI') {
   await userEvent.click(trigger(name));
   return screen.getByRole('dialog');
 }
@@ -53,14 +54,14 @@ describe('presence on every route', () => {
     it(`${name} (en) renders the closed floating button inside a labelled aside`, () => {
       renderApp(path);
       const aside = screen.getByRole('complementary', { name: 'DEMO guide assistant' });
-      const btn = within(aside).getByRole('button', { name: 'DEMO guide' });
+      const btn = within(aside).getByRole('button', { name: 'Talk to KAI' });
       expect(btn).toHaveAttribute('aria-haspopup', 'dialog');
       expect(btn).toHaveAttribute('aria-expanded', 'false');
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     });
     it(`${name} (fil) uses the Filipino label`, () => {
       renderApp(path, 'fil');
-      expect(screen.getByRole('button', { name: 'DEMO na gabay' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Kausapin si KAI' })).toBeInTheDocument();
     });
   }
 });
@@ -69,7 +70,7 @@ describe('dialog behaviour', () => {
   it('opens a labelled, non-modal DEMO dialog and moves focus into it', async () => {
     renderApp('/');
     const dialog = await openGuide();
-    expect(dialog).toHaveAccessibleName('DEMO guide');
+    expect(dialog).toHaveAccessibleName('KAI, your Kalinga guide');
     expect(dialog).not.toHaveAttribute('aria-modal', 'true');
     expect(dialog).toHaveAccessibleDescription(/scripted guide.*not AI-generated medical advice.*not a clinician/i);
     expect(dialog).toHaveFocus();
@@ -144,6 +145,7 @@ describe('conversation', () => {
     renderApp('/');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: 'Find a clinic' }));
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent(/Clinics page will list testing options/);
     const link = within(log).getByRole('link', { name: 'Clinics' });
@@ -157,6 +159,7 @@ describe('conversation', () => {
     renderApp('/');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: /Possible HIV exposure in the last 72 hours/ }));
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent(/please get a professional assessment now/i);
     expect(log).toHaveTextContent(/qualified health professional/i);
@@ -172,6 +175,7 @@ describe('conversation', () => {
     const dialog = await openGuide();
     const input = within(dialog).getByRole('textbox');
     await userEvent.type(input, 'I think I was exposed yesterday{Enter}');
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent('I think I was exposed yesterday');
     expect(log).toHaveTextContent(/professional assessment/i);
@@ -182,17 +186,46 @@ describe('conversation', () => {
     renderApp('/');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: 'Talk to a real health professional' }));
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent('No clinician is connected in this DEMO');
     expect(within(log).getByRole('link', { name: 'Clinics' })).toHaveAttribute('href', '/clinics');
   });
 
-  it('unknown input gets the fallback and the quick replies stay available', async () => {
+  it('unknown input gets the fallback and every suggestion stays available in the dropdown', async () => {
     renderApp('/');
     const dialog = await openGuide();
     await userEvent.type(within(dialog).getByRole('textbox'), 'qwerty zxcv{Enter}');
+    await settle(dialog);
     expect(within(dialog).getByRole('log')).toHaveTextContent(/I did not understand that/);
-    expect(within(within(dialog).getByRole('group', { name: 'Quick replies' })).getAllByRole('button')).toHaveLength(6);
+    await userEvent.click(within(dialog).getByRole('button', { name: 'More suggested questions' }));
+    expect(within(within(dialog).getByRole('group', { name: 'Suggested questions' })).getAllByRole('button')).toHaveLength(6);
+  });
+
+  it('after the first message the panel expands, the chips hide and the rest live in a suggestions dropdown', async () => {
+    renderApp('/');
+    const dialog = await openGuide();
+    expect(dialog).not.toHaveClass('assistant__panel--chat');
+    await userEvent.click(within(dialog).getByRole('button', { name: 'Find a clinic' }));
+    expect(within(dialog).getByRole('log')).toHaveTextContent('KAI is typing');
+    await settle(dialog);
+    expect(dialog).toHaveClass('assistant__panel--chat');
+    expect(within(dialog).queryByRole('group', { name: 'Quick replies' })).toBeNull();
+    const more = within(dialog).getByRole('button', { name: 'More suggested questions' });
+    expect(more).toHaveAttribute('aria-expanded', 'false');
+    await userEvent.click(more);
+    const names = within(within(dialog).getByRole('group', { name: 'Suggested questions' })).getAllByRole('button').map((b) => b.textContent);
+    expect(names).toHaveLength(5);
+    expect(names).not.toContain('Find a clinic');
+    // Escape closes only the dropdown, not the chat.
+    await userEvent.keyboard('{Escape}');
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(within(dialog).queryByRole('group', { name: 'Suggested questions' })).toBeNull();
+    await userEvent.click(more);
+    await userEvent.click(within(within(dialog).getByRole('group', { name: 'Suggested questions' })).getByRole('button', { name: 'Learn about STIs' }));
+    await settle(dialog);
+    expect(dialog.querySelectorAll('.assistant__msg--user')).toHaveLength(2);
+    expect(within(dialog).getByRole('log')).toHaveTextContent(/Learn pages will explain STIs/);
   });
 
   it('ignores blank submissions and caps typed text at 200 characters', () => {
@@ -221,9 +254,9 @@ describe('conversation', () => {
     renderApp('/');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: 'Change language' }));
-    await userEvent.click(within(dialog).getByRole('button', { name: 'Switch the language to Filipino' }));
+    await userEvent.click(await within(dialog).findByRole('button', { name: 'Switch the language to Filipino' }));
     expect(document.documentElement.lang).toBe('fil');
-    expect(screen.getByRole('dialog')).toHaveAccessibleName('DEMO na gabay');
+    expect(screen.getByRole('dialog')).toHaveAccessibleName('KAI, ang iyong gabay sa Kalinga');
     expect(within(screen.getByRole('dialog')).getByRole('log')).toHaveTextContent(/Hindi pa nasusuri|Draft lamang ang tekstong Filipino/);
   });
 
@@ -255,6 +288,8 @@ describe('local only: no network, no storage', () => {
     const dir = resolve(process.cwd(), 'src/assistant');
     const files = readdirSync(dir).filter((f) => /\.(ts|tsx)$/.test(f) && !/\.test\./.test(f));
     expect(files.sort()).toEqual(['AssistantWidget.tsx', 'engine.ts', 'registry.ts']);
+    // The KAI mark lives with shared components; it is inline SVG with no style attributes either.
+    expect(readFileSync(resolve(process.cwd(), 'src/components/KaiAvatar.tsx'), 'utf8')).not.toMatch(/\bstyle=/);
     for (const f of files) {
       const src = readFileSync(resolve(dir, f), 'utf8');
       expect(src, f).not.toMatch(/\bfetch\s*\(|XMLHttpRequest|sendBeacon|WebSocket|EventSource|localStorage|sessionStorage|indexedDB|document\.cookie|console\.|dangerouslySetInnerHTML|\bstyle=|\beval\(|new Function/);
@@ -301,7 +336,7 @@ describe('CSS placement', () => {
 });
 
 describe('axe-core with the guide open', () => {
-  for (const [locale, name] of [['en', 'DEMO guide'], ['fil', 'DEMO na gabay']] as const) {
+  for (const [locale, name] of [['en', 'Talk to KAI'], ['fil', 'Kausapin si KAI']] as const) {
     it(`zero violations (${locale}): closed, open, urgent reply and fallback`, async () => {
       const { container } = renderApp('/', locale);
       await waitFor(() => expect(container.querySelector('[data-state="ready"]')).not.toBeNull());
@@ -310,8 +345,13 @@ describe('axe-core with the guide open', () => {
       expect(formatViolations(await runAxe(container))).toBe('');
       const chips = within(within(dialog).getByRole('group')).getAllByRole('button');
       await userEvent.click(chips[0]!); // urgent
-      await userEvent.click(chips[4]!); // human handoff
+      await settle(dialog);
+      await userEvent.click(within(dialog).getByRole('button', { name: /^(More suggested questions|Higit pang mungkahing tanong)$/ }));
+      const items = within(within(dialog).getByRole('group', { name: /^(Suggested questions|Mga mungkahing tanong)$/ })).getAllByRole('button');
+      await userEvent.click(items[items.length - 1]!); // human handoff
+      await settle(dialog);
       await userEvent.type(within(dialog).getByRole('textbox'), 'qwerty{Enter}');
+      await settle(dialog);
       expect(formatViolations(await runAxe(container))).toBe('');
     });
   }
@@ -349,6 +389,7 @@ describe('SA-2: page-aware suggestions and final-site answers', () => {
     renderApp('/clinics');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: 'How do I request an appointment?' }));
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent(/This is a request, not a confirmation/);
     expect(within(log).getByRole('link', { name: 'Clinics' })).toHaveAttribute('href', '/clinics');
@@ -360,10 +401,13 @@ describe('SA-2: page-aware suggestions and final-site answers', () => {
     const dialog = await openGuide();
     const input = within(dialog).getByRole('textbox');
     await userEvent.type(input, 'will you send me a reminder{Enter}');
+    await settle(dialog);
     expect(within(dialog).getByRole('log')).toHaveTextContent(/mock only: no real message is sent/);
     await userEvent.type(input, 'how do I check my request status{Enter}');
+    await settle(dialog);
     expect(within(dialog).getByRole('log')).toHaveTextContent(/enter the reference and the secret code/);
     await userEvent.type(input, 'I want to book but I was exposed last night{Enter}');
+    await settle(dialog);
     expect(within(dialog).getByRole('log')).toHaveTextContent(/please get a professional assessment now/i);
   });
 
@@ -371,6 +415,7 @@ describe('SA-2: page-aware suggestions and final-site answers', () => {
     renderApp('/clinics');
     const dialog = await openGuide();
     await userEvent.click(within(dialog).getByRole('button', { name: 'Talk to a real health professional' }));
+    await settle(dialog);
     const log = within(dialog).getByRole('log');
     expect(log).toHaveTextContent('No clinician is connected in this DEMO');
     expect(log).toHaveTextContent(/request an appointment with a DEMO clinic/);
@@ -379,11 +424,12 @@ describe('SA-2: page-aware suggestions and final-site answers', () => {
   });
 
   it('axe: zero violations on the clinics page with a route-specific chip set and a booking answer (en and fil)', async () => {
-    for (const [locale, name, chip] of [['en', 'DEMO guide', 'How do I request an appointment?'], ['fil', 'DEMO na gabay', 'Paano humiling ng appointment?']] as const) {
+    for (const [locale, name, chip] of [['en', 'Talk to KAI', 'How do I request an appointment?'], ['fil', 'Kausapin si KAI', 'Paano humiling ng appointment?']] as const) {
       const { container, unmount } = renderApp('/clinics', locale);
       await waitFor(() => expect(container.querySelector('[data-state="ready"], .page, main')).not.toBeNull());
       const dialog = await openGuide(name);
       await userEvent.click(within(dialog).getByRole('button', { name: chip }));
+      await settle(dialog);
       expect(formatViolations(await runAxe(container))).toBe('');
       unmount();
     }
